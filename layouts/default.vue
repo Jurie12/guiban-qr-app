@@ -98,6 +98,11 @@ export default {
       fixed: false,
       items: [
         {
+          icon: 'mdi mdi-login',
+          title: 'Sign in',
+          to: '/auth/signin'
+        },
+        {
           icon: 'mdi-apps',
           title: 'Welcome',
           to: '/'
@@ -106,7 +111,7 @@ export default {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
           to: '/inspire'
-        }
+        },
       ],
       miniVariant: false,
       right: true,
