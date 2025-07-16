@@ -40,34 +40,36 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-        '@nuxtjs/axios',
-        '@nuxtjs/auth-next'
-  ],
-
+modules: ["@nuxtjs/axios", "@nuxtjs/auth-next"],
   auth: {
-    // Options
+    redirect: {
+      login: "/auth/signin",
+      logout: "/auth/singin",
+      callback: "/auth/callback",
+      home: "/",
+    },
+    autoFetchUser: false,
+    strategies: {
+      google: {
+        clientId:
+          "893281478245-kem17vvqs2m62o7juih9et16lmrmh2qq.apps.googleusercontent.com",
+        scheme: "oauth2",
+        endpoints: {
+          authorization: "https://accounts.google.com/o/oauth2/auth",
+          userInfo: "https://www.googleapis.com/oauth2/v3/userinfo",
+        },
+        token: {
+          property: "access_token",
+          type: "Bearer",
+          maxAge: 1800,
+        },
+        responseType: "token id_token",
+        scope: ["openid", "profile", "email"],
+        redirectUri: "http://localhost:3000/auth/callback",
+        codeChallengeMethod: "",
+      },
+    },
   },
-
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-  vuetify: {
-    customVariables: ['~/assets/variables.scss'],
-    theme: {
-      dark: true,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
-  },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

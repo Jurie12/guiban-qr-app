@@ -54,9 +54,14 @@
           <v-divider class="flex-grow-1" />
         </div>
 
-        <v-btn class="rounded-btn google-btn" elevation="2" size="large" block>
-          <v-icon left class="me-2">mdi-google</v-icon>
-          Sign in with Google
+                <v-btn 
+                  color="red"
+                  dark
+                  rounded
+                  @click="signInWithGoogle()"
+                >
+                  <v-icon left>"mdi mdi-google"</v-icon>
+                  Sign in with Google
         </v-btn>
       </v-form>
     </v-card>
@@ -93,3 +98,15 @@
   min-height: 56px;
 }
 </style>
+<script>
+export default {
+ layout: "auth",
+ middleware: "guest",
+ methods:{
+  signInWithGoogle() {
+    this.$auth.loginWith('google')
+  }
+ }
+}
+
+</script>

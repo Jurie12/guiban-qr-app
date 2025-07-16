@@ -50,6 +50,7 @@
       </v-btn>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
+
       <v-btn
         icon
         @click.stop="rightDrawer = !rightDrawer"
@@ -98,7 +99,7 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi mdi-login',
+          icon: 'mdi-login',
           title: 'Sign in',
           to: '/auth/signin'
         },
