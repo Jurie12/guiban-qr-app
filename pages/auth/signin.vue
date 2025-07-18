@@ -1,112 +1,78 @@
 <template>
-  <v-container class="d-flex justify-center align-center" style="height: 50vh">
-    <v-card class="pa-9" max-width="500" elevation="10" rounded="lg">
-      <div class="d-flex align-center my-4">
-        <v-divider class="flex-grow-1" />
-        <div class="mx-4">Login Page</div>
-        <v-divider class="flex-grow-1" />
-      </div>
+  <div class="d-flex align-center justify-center" style="height: 100vh;">
+    <v-card
+      elevation="10"
+      class="pa-6 rounded-xl"
+      max-width="420"
+    >
+      <h2 class="text-h5 text-center mb-6 font-weight-medium">Sign In</h2>
 
-      <v-form v-model="form">
-        <v-text-field
-          v-model="username"
-          :readonly="loading"
-          :rules="[required]"
-          label="Username"
-          type="text"
-          prepend-inner-icon="mdi-account-multiple"
-          clearable
-          class="mb-4 steady-input"
-          hide-details="true"
-          density="comfortable"
-          rounded
-          outlined
-        />
+      <!-- Username / Email -->
+      <v-text-field
+        placeholder="Email"
+        prepend-inner-icon="mdi-email-outline"
+        outlined
+        rounded
+        dense
+        class="mb-4"
+      ></v-text-field>
 
-        <v-text-field
-          v-model="password"
-          :readonly="loading"
-          :rules="[required]"
-          label="Password"
-          type="password"
-          prepend-inner-icon="mdi-lock-outline"
-          clearable
-          class="mb-6 steady-input"
-          hide-details="true"
-          density="comfortable"
-          rounded
-          outlined
-        />
+      <!-- Password -->
+      <v-text-field
+        :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="visible ? 'text' : 'password'"
+        placeholder="Password"
+        prepend-inner-icon="mdi-lock-outline"
+        outlined
+        rounded
+        dense
+        @click:append-inner="visible = !visible"
+        class="mb-6"
+      ></v-text-field>
 
-        <v-btn
-          :loading="loading"
-          class="rounded-btn primary-btn"
-          size="large"
-          type="button"
-          block
-        >
-          Login
-        </v-btn>
+      <!-- Login Button -->
+      <v-btn
+        color="primary"
+        rounded
+        block
+        large
+        class="mb-4"
+      >
+        Log In
+      </v-btn>
 
-        <div class="d-flex align-center my-4">
-          <v-divider class="flex-grow-1" />
-          <div class="mx-4">or</div>
-          <v-divider class="flex-grow-1" />
-        </div>
+      <!-- OR Divider -->
+      <div class="text-center text-subtitle-2 mb-4">OR</div>
 
-                <v-btn 
-                  color="red"
-                  dark
-                  rounded
-                  @click="signInWithGoogle()"
-                >
-                  <v-icon left>"mdi mdi-google"</v-icon>
-                  Sign in with Google
-        </v-btn>
-      </v-form>
+      <!-- Google Sign-in Button -->
+      <v-btn
+        color="red darken-1"
+        dark
+        rounded
+        block
+        large
+        @click="signinWithGoogle"
+      >
+        <v-icon left>mdi-google</v-icon>
+        Sign in with Google
+      </v-btn>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
-<style scoped>
-.rounded-btn {
-  border-radius: 30px;
-  font-weight: bold;
-  text-transform: none;
-}
+<script setup>
+import { ref } from 'vue'
+const visible = ref(false)
+</script>
 
-.primary-btn {
-  background-color: #1976d2 !important;
-  color: white;
-}
-
-.google-btn {
-  background-color: #db4437 !important;
-  color: white;
-  border: none;
-  text-transform: none;
-  font-weight: 500;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.google-btn:hover {
-  background-color: #c33d2e !important;
-}
-
-.steady-input {
-  min-height: 56px;
-}
-</style>
 <script>
 export default {
- layout: "auth",
- middleware: "guest",
- methods:{
-  signInWithGoogle() {
-    this.$auth.loginWith('google')
+  layout: "auth",
+  middleware: "guest",
+  methods: {
+    signinWithGoogle() {
+      this.$auth.loginWith('google')
+    }
   }
- }
 }
-
 </script>
